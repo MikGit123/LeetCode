@@ -1,0 +1,16 @@
+class Solution(object):
+    def isPalindrome(self, x):
+        """
+        :type x: int
+        :rtype: bool
+        """
+        def p(input_string):
+            reversed_string = input_string[::-1]
+            index = 0
+            while index < len(input_string):
+                if input_string[index] != reversed_string[index]:
+                    return False
+                index += 1
+            return True
+        y = str(x)
+        return p(y)

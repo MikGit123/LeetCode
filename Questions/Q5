@@ -1,0 +1,45 @@
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        if not s: return ""
+        
+       
+        MaxOdd = [0, 0]
+        MaxEven = [0, 0]
+
+        def Expand(Left, Right, s):
+           
+            while Left >= 0 and Right < len(s) and s[Left] == s[Right]:
+                Left = Left - 1
+                Right = Right + 1
+            return [Left, Right]
+
+        def Length(List):
+            
+            return List[1] - List[0] - 1
+       
+        
+        for i in range(len(s)):
+            Odd = Expand(i, i, s)         
+            Even = Expand(i, i + 1, s)
+            
+            if Length(Odd) > Length(MaxOdd):
+                MaxOdd = Odd
+            
+            if Length(Even) > Length(MaxEven):
+                MaxEven = Even
+
+       
+        if Length(MaxEven) > Length(MaxOdd):
+            best_bounds = MaxEven
+        else:
+            best_bounds = MaxOdd
+            
+       
+        start = best_bounds[0] + 1
+        end = best_bounds[1]
+        
+        return "".join(s[start:end])
